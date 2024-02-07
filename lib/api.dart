@@ -8,12 +8,16 @@ class DictionaryApi {
 
   final http.Client _client;
 
+  String host = 'api.dictionaryapi.dev';
+  String version = 'v2';
+  String language = 'en';
+
   DictionaryApi(this._client);
 
   Future<List<Entry>> lookup(String word) async {
     Uri uri = Uri.https(
-      'api.dictionaryapi.dev', 
-      'api/v2/entries/en/${Uri.encodeComponent(word.toLowerCase())}'
+      host, 
+      'api/$version/entries/$language/${Uri.encodeComponent(word.toLowerCase())}'
     );
     var response = await _client.get(uri);
     if(response.statusCode == 200){
